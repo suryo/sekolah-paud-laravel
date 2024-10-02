@@ -3,6 +3,15 @@
 use App\Http\Controllers\Backend\SettingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\Backend\Website\BKController;
+use App\Http\Controllers\Backend\Website\BKTanggapanController;
+use App\Http\Controllers\Backend\Website\BKKarirController;
+use App\Http\Controllers\Backend\Website\BKKonselingKelompokController;
+use App\Http\Controllers\Backend\Website\BKKelompokController;
+use App\Http\Controllers\Backend\Website\BKPribadiController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,27 +25,27 @@ use Illuminate\Support\Facades\Auth;
 
 // ======= FRONTEND ======= \\
 
-Route::get('/','Frontend\IndexController@index');
+Route::get('/', 'Frontend\IndexController@index');
 
-    ///// MENU \\\\\
-        //// PROFILE SEKOLAH \\\\
-        Route::get('profile-sekolah',[App\Http\Controllers\Frontend\IndexController::class,'profileSekolah'])->name('profile.sekolah');
+///// MENU \\\\\
+//// PROFILE SEKOLAH \\\\
+Route::get('profile-sekolah', [App\Http\Controllers\Frontend\IndexController::class, 'profileSekolah'])->name('profile.sekolah');
 
-        //// VISI dan MISI
-        Route::get('visi-dan-misi',[App\Http\Controllers\Frontend\IndexController::class,'visimisi'])->name('visimisi.sekolah');
+//// VISI dan MISI
+Route::get('visi-dan-misi', [App\Http\Controllers\Frontend\IndexController::class, 'visimisi'])->name('visimisi.sekolah');
 
-        //// PROGRAM STUDI \\\\
-        Route::get('program/{slug}', [App\Http\Controllers\Frontend\MenuController::class, 'programStudi']);
-        //// PROGRAM STUDI \\\\
-        Route::get('kegiatan/{slug}', [App\Http\Controllers\Frontend\MenuController::class, 'kegiatan']);
+//// PROGRAM STUDI \\\\
+Route::get('program/{slug}', [App\Http\Controllers\Frontend\MenuController::class, 'programStudi']);
+//// PROGRAM STUDI \\\\
+Route::get('kegiatan/{slug}', [App\Http\Controllers\Frontend\MenuController::class, 'kegiatan']);
 
-        /// BERITA \\\
-        Route::get('berita',[App\Http\Controllers\Frontend\IndexController::class,'berita'])->name('berita');
-        Route::get('berita/{slug}',[App\Http\Controllers\Frontend\IndexController::class,'detailBerita'])->name('detail.berita');
+/// BERITA \\\
+Route::get('berita', [App\Http\Controllers\Frontend\IndexController::class, 'berita'])->name('berita');
+Route::get('berita/{slug}', [App\Http\Controllers\Frontend\IndexController::class, 'detailBerita'])->name('detail.berita');
 
-        /// EVENT \\\
-        Route::get('event/{slug}',[App\Http\Controllers\Frontend\IndexController::class,'detailEvent'])->name('detail.event');
-        Route::get('event',[App\Http\Controllers\Frontend\IndexController::class,'events'])->name('event');
+/// EVENT \\\
+Route::get('event/{slug}', [App\Http\Controllers\Frontend\IndexController::class, 'detailEvent'])->name('detail.event');
+Route::get('event', [App\Http\Controllers\Frontend\IndexController::class, 'events'])->name('event');
 
 Auth::routes(['register' => false]);
 
@@ -45,23 +54,23 @@ Auth::routes(['register' => false]);
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-     /// PROFILE \\\
-    Route::resource('profile-settings',Backend\ProfileController::class);
+    /// PROFILE \\\
+    Route::resource('profile-settings', Backend\ProfileController::class);
     /// SETTINGS \\\
-      Route::prefix('settings')->group( function(){
+    Route::prefix('settings')->group(function () {
         // BANK
-        Route::get('/',[App\Http\Controllers\Backend\SettingController::class,'index'])->name('settings');
+        Route::get('/', [App\Http\Controllers\Backend\SettingController::class, 'index'])->name('settings');
         // TAMBAH BANK
-        Route::post('add-bank',[App\Http\Controllers\Backend\SettingController::class,'addBank'])->name('settings.add.bank');
+        Route::post('add-bank', [App\Http\Controllers\Backend\SettingController::class, 'addBank'])->name('settings.add.bank');
         // NOTIFICATIONS
-        Route::put('notifications/{id}',[SettingController::class,'notifications']);
-      });
+        Route::put('notifications/{id}', [SettingController::class, 'notifications']);
+    });
 
 
     /// CHANGE PASSWORD
-    Route::put('profile-settings/change-password/{id}',[App\Http\Controllers\Backend\ProfileController::class, 'changePassword'])->name('profile.change-password');
+    Route::put('profile-settings/change-password/{id}', [App\Http\Controllers\Backend\ProfileController::class, 'changePassword'])->name('profile.change-password');
 
-    Route::prefix('/')->middleware('role:Admin')->group( function (){
+    Route::prefix('/')->middleware('role:Admin')->group(function () {
         ///// WEBSITE \\\\\
         Route::resources([
             /// PROFILE SEKOLAH \\
@@ -103,5 +112,54 @@ Route::middleware('auth')->group(function () {
             /// BENDAHARA \\\
             'backend-pengguna-bendahara'  => Backend\Pengguna\BendaharaController::class
         ]);
+
+
+       
+
+        // siswa
+        Route::get('bimbingan-konseling/karir', [BKKarirController::class, 'index'])->name('bimbingan.karir');
+        Route::get('bimbingan-konseling/karir/create', [BKKarirController::class, 'create'])->name('bimbingan.karir.create');
+        Route::post('bimbingan-konseling/karir', [BKKarirController::class, 'store'])->name('bimbingan.karir.store');
+        Route::get('bimbingan-konseling/karir/{data_bk}/show', [BKKarirController::class, 'show'])->name('bimbingan.karir.show');
+
+        Route::get('bimbingan-konseling/konseling-kelompok', [BKKonselingKelompokController::class, 'index'])->name('bimbingan.konseling.kelompok');
+        Route::get('bimbingan-konseling/konseling-kelompok/create', [BKKonselingKelompokController::class, 'create'])->name('bimbingan.konseling.kelompok.create');
+        Route::post('bimbingan-konseling/konseling-kelompok', [BKKonselingKelompokController::class, 'store'])->name('bimbingan.konseling.kelompok.store');
+        Route::get('bimbingan-konseling/konseling-kelompok/{data_bk}/show', [BKKonselingKelompokController::class, 'show'])->name('bimbingan.konseling.kelompok.show');
+
+        Route::get('bimbingan-konseling/kelompok', [BKKelompokController::class, 'index'])->name('bimbingan.kelompok');
+        Route::get('bimbingan-konseling/kelompok/create', [BKKelompokController::class, 'create'])->name('bimbingan.kelompok.create');
+        Route::post('bimbingan-konseling/kelompok', [BKKelompokController::class, 'store'])->name('bimbingan.kelompok.store');
+        Route::get('bimbingan-konseling/kelompok/{data_bk}/show', [BKKelompokController::class, 'show'])->name('bimbingan.kelompok.show');
+
+        Route::get('bimbingan-konseling/pribadi', [BKPribadiController::class, 'index'])->name('bimbingan.pribadi');
+        Route::get('bimbingan-konseling/pribadi/create', [BKPribadiController::class, 'create'])->name('bimbingan.pribadi.create');
+        Route::post('bimbingan-konseling/pribadi', [BKPribadiController::class, 'store'])->name('bimbingan.pribadi.store');
+        Route::get('bimbingan-konseling/pribadi/{data_bk}/show', [BKPribadiController::class, 'show'])->name('bimbingan.pribadi.show');
     });
+    
 });
+
+
+
+Route::prefix('/')->middleware('role:Guru')->group(function () {
+    // guru
+    Route::get('bimbingan-konseling/masuk', [BKController::class, 'index'])->name('bimbingan.masuk');
+    Route::get('bimbingan-konseling/masuk/lihat/{bk}', [BKController::class, 'show'])->name('guru.bimbingan.masuk.show');
+    Route::get('bimbingan-konseling/masuk/tanggapi/{bk}', [BKController::class, 'edit'])->name('guru.bimbingan.masuk.tanggapi');
+    Route::put('bimbingan-konseling/masuk/{bk}', [BKController::class, 'update'])->name('bimbingan.masuk.update');
+
+    Route::get('bimbingan-konseling/ditanggapi', [BKTanggapanController::class, 'index'])->name('bimbingan.ditanggapi');
+    Route::get('bimbingan-konseling/ditanggapi/lihat/{bk}', [BKTanggapanController::class, 'show'])->name('bimbingan.ditanggapi.show');
+    }
+);
+
+
+Route::prefix('/')->middleware('role:Murid')->group(function () {
+    // murid
+    Route::get('bimbingan-konseling/pribadi', [BKPribadiController::class, 'index'])->name('bimbingan.pribadi');
+    Route::get('bimbingan-konseling/pribadi/create', [BKPribadiController::class, 'create'])->name('bimbingan.pribadi.create');
+    Route::post('bimbingan-konseling/pribadi', [BKPribadiController::class, 'store'])->name('bimbingan.pribadi.store');
+    Route::get('bimbingan-konseling/pribadi/{data_bk}/show', [BKPribadiController::class, 'show'])->name('bimbingan.pribadi.show');
+}
+);

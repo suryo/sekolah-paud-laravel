@@ -84,7 +84,7 @@ class MuridController extends Controller
             $murid->email           = $request->email;
             $murid->role            = 'Guest';
             $murid->foto_profile    = $nama_img ?? '';
-            $murid->password        = bcrypt( $request->password);
+            $murid->password        = bcrypt(12345678);
             $murid->save();
 
             if ($murid) {
@@ -169,6 +169,7 @@ class MuridController extends Controller
             $murid->email           = $request->email;
             $murid->role            = $request->role;
             $murid->status          = $request->status;
+            $murid->password        = bcrypt(12345678);
             $murid->update();
 
             DB::table('model_has_roles')->where('model_id',$id)->delete();

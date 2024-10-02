@@ -31,6 +31,7 @@ class User extends Authenticatable
         'foto_profile',
         'email',
         'password',
+        'nis', 'nip',
     ];
 
     /**
@@ -94,5 +95,13 @@ class User extends Authenticatable
     public function setting()
     {
         return $this->hasOne(Setting::class);
+    }
+
+    public function tanggapan_guru(){
+        return $this->hasMany('App\Models\LayananBK', 'tanggapan_guru_id');
+    }
+    
+    public function dibuat_oleh(){
+        return $this->hasMany('App\Models\LayananBK', 'dibuat_oleh_id');
     }
 }

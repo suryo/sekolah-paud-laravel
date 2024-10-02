@@ -49,12 +49,12 @@
             ],
             "authors": [
                 {
-                    "name": "Andri Desmana",
-                    "email": "andridesmana29@gmail.com"
+                    "name": "Suryo Atmojo",
+                    "email": "suryoatm@gmail.com"
                 }
             ],
             "description": "List Bank of Indonesian",
-            "homepage": "https://andridesmana.pw/",
+            "homepage": "https://github.com/suryo/",
             "keywords": [
                 "Bank",
                 "csv",
