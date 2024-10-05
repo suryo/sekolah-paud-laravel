@@ -23,21 +23,15 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="footer-box">
-                    <h3>Informasi</h3>
-                    <ul class="corporate-address">
-                        <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:{{@$footer->telp}}"> {{@$footer->telp}}</a></li>
-                        <li><i class="fa fa-envelope-o" aria-hidden="true"></i>{{@$footer->email}}</li>
-                    </ul>
+                    <h3>Informasi Pendaftaran</h3>
+                   
                     <div class="newsletter-area">
-                        <h3>Ingin mendapat berita terupdate ?</h3>
-                        <div class="input-group stylish-input-group">
-                            <input type="text" placeholder="Masukan email kamu disini" class="form-control">
-                            <span class="input-group-addon">
-                                    <button type="submit">
-                                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                        </div>
+                        <a href="https://wa.me/6281217173406?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">
+                            <button style="background-color: #25D366; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                                Hubungi Kami di WhatsApp
+                            </button>
+                        </a>
+                        
                     </div>
                 </div>
             </div>
