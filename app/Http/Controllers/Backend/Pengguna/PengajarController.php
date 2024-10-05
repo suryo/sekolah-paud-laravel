@@ -9,7 +9,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PengajarRequest;
 use ErrorException;
 use Session;
+use App\Models\LaporanAkademik;
+use App\Models\dataMurid;
+use App\Models\DataKelompokBelajar;
+use App\Models\DataSemester;
+use App\Models\DataTahunAjaran;
+
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\LaporanAkademikRequest;
+use Illuminate\Support\Facades\Auth;
+
+
+
+
+
 
 class PengajarController extends Controller
 {
@@ -20,7 +33,7 @@ class PengajarController extends Controller
      */
     public function index()
     {
-        $pengajar = User::with('userDetail')->where('role','Guru')->get();
+        $pengajar = User::with('userDetail')->where('role', 'Guru')->get();
         return view('backend.pengguna.pengajar.index', compact('pengajar'));
     }
 
@@ -46,10 +59,10 @@ class PengajarController extends Controller
             DB::beginTransaction();
 
             $image = $request->file('foto_profile');
-            $nama_img = time()."_".$image->getClientOriginalName();
+            $nama_img = time() . "_" . $image->getClientOriginalName();
             // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'public/images/profile';
-            $image->storeAs($tujuan_upload,$nama_img);
+            $image->storeAs($tujuan_upload, $nama_img);
 
             // Pilih kalimat
             $kalimatKe  = "1";
@@ -58,7 +71,7 @@ class PengajarController extends Controller
             $user = new User;
             $user->name             = $request->name;
             $user->email            = $request->email;
-            $user->username         = strtolower($username).date("s");
+            $user->username         = strtolower($username) . date("s");
             $user->role             = 'Guru';
             $user->status           = 'Aktif';
             $user->foto_profile     = $nama_img;
@@ -83,9 +96,8 @@ class PengajarController extends Controller
 
             $user->assignRole($user->role);
             DB::commit();
-            Session::flash('success','Pengajar Berhasil ditambah !');
+            Session::flash('success', 'Pengajar Berhasil ditambah !');
             return redirect()->route('backend-pengguna-pengajar.index');
-
         } catch (ErrorException $e) {
             DB::rollback();
             throw new ErrorException($e->getMessage());
@@ -111,7 +123,7 @@ class PengajarController extends Controller
      */
     public function edit($id)
     {
-        $pengajar = User::with('userDetail')->where('role','Guru')->find($id);
+        $pengajar = User::with('userDetail')->where('role', 'Guru')->find($id);
         return view('backend.pengguna.pengajar.edit', compact('pengajar'));
     }
 
@@ -129,13 +141,13 @@ class PengajarController extends Controller
 
             if ($request->foto_profile) {
                 $image = $request->file('foto_profile');
-                $nama_img = time()."_".$image->getClientOriginalName();
+                $nama_img = time() . "_" . $image->getClientOriginalName();
                 // isi dengan nama folder tempat kemana file diupload
                 $tujuan_upload = 'public/images/profile';
-                $image->storeAs($tujuan_upload,$nama_img);
+                $image->storeAs($tujuan_upload, $nama_img);
             }
 
-           
+
             $user = User::find($id);
             $user->name             = $request->name;
             $user->email            = $request->email;
@@ -161,9 +173,8 @@ class PengajarController extends Controller
             }
 
             DB::commit();
-            Session::flash('success','Pengajar Berhasil diubah !');
+            Session::flash('success', 'Pengajar Berhasil diubah !');
             return redirect()->route('backend-pengguna-pengajar.index');
-
         } catch (ErrorException $e) {
             DB::rollback();
             throw new ErrorException($e->getMessage());
@@ -179,5 +190,118 @@ class PengajarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function ListLaporanAkademik()
+    {
+        // dd(Auth::user()->id);
+        $file = LaporanAkademik::with(['murid', 'semester', 'tahunAjaran', 'kelompokBelajar'])->get();
+    
+        $students = dataMurid::all();
+        $kelompokbelajar = DataKelompokBelajar::all();
+        $semester = DataSemester::all();
+        $tahunajaran = DataTahunAjaran::all();
+        
+        return view('backend.website.content.LaporanAkademik.index', compact('file','students','kelompokbelajar', 'semester', 'tahunajaran'));
+    }
+
+    public function LaporanAkademikstore(Request $request)
+    {
+        $request->validate([
+            'filelaporanakademik' => 'required|mimes:pdf|max:2048', // maksimal ukuran 2MB
+            'title' => 'required|string|max:255',
+            'desc' => 'nullable|string'
+        ]);
+
+        try {
+            $uploadFolder = public_path('public/file/laporanakademik');
+            if (!is_dir($uploadFolder)) {
+                mkdir($uploadFolder, 0775, true);
+            }
+            chmod($uploadFolder, 0775);
+            $file = $request->file('filelaporanakademik');
+            $filename = time() . "_" . $file->getClientOriginalName();
+            $file->move('laporanakademik', $filename);
+
+            $laporanAkademik = new LaporanAkademik;
+            $laporanAkademik->id_murid     = $request->murid;
+            $laporanAkademik->id_guru  = Auth::user()->id;
+            $laporanAkademik->id_kelompokbelajar = $request->kelompokbelajar;
+            $laporanAkademik->id_semester = $request->semester;
+            $laporanAkademik->id_tahunajaran = $request->tahunajaran;
+            $laporanAkademik->file     = $filename;
+            $laporanAkademik->title     = $request->title;
+            $laporanAkademik->desc      = $request->desc;
+            $laporanAkademik->moral = $request->moral;
+            $laporanAkademik->fisik_motorik = $request->fisik_motorik;
+            $laporanAkademik->kognitif = $request->kognitif;
+            $laporanAkademik->bahasa = $request->bahasa;
+            $laporanAkademik->sosial_emosional = $request->sosial_emosional;
+            $laporanAkademik->seni = $request->seni;
+            $laporanAkademik->rekomendasi_orangtua = $request->rekomendasi_orangtua;
+            $laporanAkademik->save();
+
+            Session::flash('success', 'file laporan akademik Berhasil ditambah !');
+            return redirect()->route('backend-laporanakademik.index');
+        } catch (ErrorException $e) {
+
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    public function LaporanAkademikedit($id)
+    {
+        $file = LaporanAkademik::find($id);
+        $students = dataMurid::all();
+        $kelompokbelajar = DataKelompokBelajar::all();
+        $semester = DataSemester::all();
+        $tahunajaran = DataTahunAjaran::all();
+        return view('backend.website.content.LaporanAkademik.edit', compact('file','students','kelompokbelajar', 'semester', 'tahunajaran'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function LaporanAkademikupdate(Request $request, $id)
+    {
+        try {
+            $uploadFolder = public_path('public/file/laporanakademik');
+            if (!is_dir($uploadFolder)) {
+                mkdir($uploadFolder, 0775, true);
+            }
+            chmod($uploadFolder, 0775);
+            $file = $request->file('filelaporanakademik');
+            $filename = time() . "_" . $file->getClientOriginalName();
+            $file->move('laporanakademik', $filename);
+
+
+            $laporanAkademik = LaporanAkademik::find($id);
+            $laporanAkademik->id_murid     = $request->murid;
+            $laporanAkademik->id_guru  = Auth::user()->id;
+            $laporanAkademik->id_kelompokbelajar = $request->kelompokbelajar;
+            $laporanAkademik->id_semester = $request->semester;
+            $laporanAkademik->id_tahunajaran = $request->tahunajaran;
+            $laporanAkademik->file     = $filename;
+            $laporanAkademik->title     = $request->title;
+            $laporanAkademik->desc      = $request->desc;
+            $laporanAkademik->moral = $request->moral;
+            $laporanAkademik->fisik_motorik = $request->fisik_motorik;
+            $laporanAkademik->kognitif = $request->kognitif;
+            $laporanAkademik->bahasa = $request->bahasa;
+            $laporanAkademik->sosial_emosional = $request->sosial_emosional;
+            $laporanAkademik->seni = $request->seni;
+            $laporanAkademik->rekomendasi_orangtua = $request->rekomendasi_orangtua;
+            $laporanAkademik->save();
+
+            Session::flash('success', 'file laporan akademik Berhasil ditambah !');
+            return redirect()->route('backend-laporanakademik.index');
+        } catch (ErrorException $e) {
+            throw new ErrorException($e->getMessage());
+        }
     }
 }
