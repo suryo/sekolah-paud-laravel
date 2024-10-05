@@ -47,6 +47,8 @@
         <!-- News and Event Area Start Here -->
             @yield('beritaEvent')
         <!-- News and Event Area End Here -->
+
+        @yield('gallery')
         
         <!-- Footer Area Start Here -->
         <footer>

@@ -16,6 +16,7 @@ use App\Models\ProfileSekolah;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\Visimisi;
+use App\Models\Photo;
 
 class IndexController extends Controller
 {
@@ -156,6 +157,20 @@ class IndexController extends Controller
 
         $visimisi = Visimisi::first();
         return view('frontend.content.visimisi', compact('visimisi','jurusanM','kegiatanM','pengajar','footer'));
+    }
+
+    public function gallery()
+    {
+        $jurusanM = Jurusan::where('is_active','0')->get();
+        $kegiatanM = Kegiatan::where('is_active','0')->get();
+
+        // Pengajar
+        $pengajar = User::with('userDetail')->where('status','Aktif')->where('role','Guru')->get();
+
+        // Footer
+        $footer = Footer::first();
+        $photos = Photo::all();
+        return view('frontend.content.gallery', compact('photos','jurusanM','kegiatanM','pengajar','footer'));
     }
 
 }

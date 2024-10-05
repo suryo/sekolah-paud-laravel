@@ -11,6 +11,8 @@ use App\Http\Controllers\Backend\Website\BKKonselingKelompokController;
 use App\Http\Controllers\Backend\Website\BKKelompokController;
 use App\Http\Controllers\Backend\Website\BKPribadiController;
 
+// use PhotoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,7 @@ Route::get('berita/{slug}', [App\Http\Controllers\Frontend\IndexController::clas
 /// EVENT \\\
 Route::get('event/{slug}', [App\Http\Controllers\Frontend\IndexController::class, 'detailEvent'])->name('detail.event');
 Route::get('event', [App\Http\Controllers\Frontend\IndexController::class, 'events'])->name('event');
+Route::get('gallery', [App\Http\Controllers\Frontend\IndexController::class, 'gallery']);
 
 Auth::routes(['register' => false]);
 
@@ -71,6 +74,8 @@ Route::middleware('auth')->group(function () {
     Route::put('profile-settings/change-password/{id}', [App\Http\Controllers\Backend\ProfileController::class, 'changePassword'])->name('profile.change-password');
 
     Route::prefix('/')->middleware('role:Admin')->group(function () {
+
+        Route::resource('admin/photos',PhotoController::class);
         ///// WEBSITE \\\\\
         Route::resources([
             /// PROFILE SEKOLAH \\
