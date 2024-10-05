@@ -51,6 +51,7 @@ Route::get('berita/{slug}', [App\Http\Controllers\Frontend\IndexController::clas
 Route::get('event/{slug}', [App\Http\Controllers\Frontend\IndexController::class, 'detailEvent'])->name('detail.event');
 Route::get('event', [App\Http\Controllers\Frontend\IndexController::class, 'events'])->name('event');
 Route::get('gallery', [App\Http\Controllers\Frontend\IndexController::class, 'gallery'])->name('gallery');
+// Route::get('pendaftaran', [App\Http\Controllers\Frontend\IndexController::class, 'gallery'])->name('gallery');
 
 Auth::routes(['register' => false]);
 
@@ -77,7 +78,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/')->middleware('role:Admin')->group(function () {
 
-        Route::resource('admin/photos',PhotoController::class);
+        Route::resource('admin/photos', PhotoController::class);
         ///// WEBSITE \\\\\
         Route::resources([
             /// PROFILE SEKOLAH \\
@@ -121,7 +122,7 @@ Route::middleware('auth')->group(function () {
         ]);
 
 
-       
+
 
         // siswa
         Route::get('bimbingan-konseling/karir', [BKKarirController::class, 'index'])->name('bimbingan.karir');
@@ -144,38 +145,38 @@ Route::middleware('auth')->group(function () {
         Route::post('bimbingan-konseling/pribadi', [BKPribadiController::class, 'store'])->name('bimbingan.pribadi.store');
         Route::get('bimbingan-konseling/pribadi/{data_bk}/show', [BKPribadiController::class, 'show'])->name('bimbingan.pribadi.show');
     });
-    
 });
 
 
 
-Route::prefix('/')->middleware('role:Guru')->group(function () {
-    // guru
-    Route::get('bimbingan-konseling/masuk', [BKController::class, 'index'])->name('bimbingan.masuk');
-    Route::get('bimbingan-konseling/masuk/lihat/{bk}', [BKController::class, 'show'])->name('guru.bimbingan.masuk.show');
-    Route::get('bimbingan-konseling/masuk/tanggapi/{bk}', [BKController::class, 'edit'])->name('guru.bimbingan.masuk.tanggapi');
-    Route::put('bimbingan-konseling/masuk/{bk}', [BKController::class, 'update'])->name('bimbingan.masuk.update');
+Route::prefix('/')->middleware('role:Guru')->group(
+    function () {
+        // guru
+        Route::get('bimbingan-konseling/masuk', [BKController::class, 'index'])->name('bimbingan.masuk');
+        Route::get('bimbingan-konseling/masuk/lihat/{bk}', [BKController::class, 'show'])->name('guru.bimbingan.masuk.show');
+        Route::get('bimbingan-konseling/masuk/tanggapi/{bk}', [BKController::class, 'edit'])->name('guru.bimbingan.masuk.tanggapi');
+        Route::put('bimbingan-konseling/masuk/{bk}', [BKController::class, 'update'])->name('bimbingan.masuk.update');
 
-    Route::get('bimbingan-konseling/ditanggapi', [BKTanggapanController::class, 'index'])->name('bimbingan.ditanggapi');
-    Route::get('bimbingan-konseling/ditanggapi/lihat/{bk}', [BKTanggapanController::class, 'show'])->name('bimbingan.ditanggapi.show');
+        Route::get('bimbingan-konseling/ditanggapi', [BKTanggapanController::class, 'index'])->name('bimbingan.ditanggapi');
+        Route::get('bimbingan-konseling/ditanggapi/lihat/{bk}', [BKTanggapanController::class, 'show'])->name('bimbingan.ditanggapi.show');
 
-    Route::get('backend-laporanakademik', [PengajarController::class, 'ListLaporanAkademik'])->name('backend-laporanakademik.index');
-    Route::post('backend-laporanakademik-store', [PengajarController::class, 'LaporanAkademikstore'])->name('backend-laporanakademik.store');
-    Route::get('backend-laporanakademik-edit/{id}', [PengajarController::class, 'LaporanAkademikedit'])->name('backend-laporanakademik.edit');
-    Route::post('backend-laporanakademik-update/{id}', [PengajarController::class, 'LaporanAkademikupdate'])->name('backend-laporanakademik.update');
+        Route::get('backend-laporanakademik', [PengajarController::class, 'ListLaporanAkademik'])->name('backend-laporanakademik.index');
+        Route::post('backend-laporanakademik-store', [PengajarController::class, 'LaporanAkademikstore'])->name('backend-laporanakademik.store');
+        Route::get('backend-laporanakademik-edit/{id}', [PengajarController::class, 'LaporanAkademikedit'])->name('backend-laporanakademik.edit');
+        Route::post('backend-laporanakademik-update/{id}', [PengajarController::class, 'LaporanAkademikupdate'])->name('backend-laporanakademik.update');
     }
 );
 
 
-Route::prefix('/')->middleware('role:Murid')->group(function () {
-    // murid
-    
-    Route::get('bimbingan-konseling/pribadi', [BKPribadiController::class, 'index'])->name('bimbingan.pribadi');
-    Route::get('bimbingan-konseling/pribadi/create', [BKPribadiController::class, 'create'])->name('bimbingan.pribadi.create');
-    Route::post('bimbingan-konseling/pribadi', [BKPribadiController::class, 'store'])->name('bimbingan.pribadi.store');
-    Route::get('bimbingan-konseling/pribadi/{data_bk}/show', [BKPribadiController::class, 'show'])->name('bimbingan.pribadi.show');
+Route::prefix('/')->middleware('role:Murid')->group(
+    function () {
+        // murid
 
-    Route::get('backend-laporanakademikmurid', [MuridController::class, 'laporanakademikmurid'])->name('backend-laporanakademik.murid');
+        Route::get('bimbingan-konseling/pribadi', [BKPribadiController::class, 'index'])->name('bimbingan.pribadi');
+        Route::get('bimbingan-konseling/pribadi/create', [BKPribadiController::class, 'create'])->name('bimbingan.pribadi.create');
+        Route::post('bimbingan-konseling/pribadi', [BKPribadiController::class, 'store'])->name('bimbingan.pribadi.store');
+        Route::get('bimbingan-konseling/pribadi/{data_bk}/show', [BKPribadiController::class, 'show'])->name('bimbingan.pribadi.show');
 
-}
+        Route::get('backend-laporanakademikmurid', [MuridController::class, 'laporanakademikmurid'])->name('backend-laporanakademik.murid');
+    }
 );

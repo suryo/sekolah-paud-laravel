@@ -9,9 +9,9 @@
                 <div class="title-container s-tb-c">
                     <div class="title1">Best Education For You</div>
                     <p>Kini Mendaftar ke PPT Dahlia Sememi lebih Mudah Daftar dari rumah dan tes dari rumah.</p>
-                    <div class="slider-btn-area">
+                    {{-- <div class="slider-btn-area">
                         <a href="{{route('register')}}" class="default-big-btn">Daftar</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -26,6 +26,8 @@
                 </div>
             </div>
         </div> --}}
+
+     
     </div>
 </div>
 <div class="service1-area d-none">
@@ -36,6 +38,11 @@
                     <div class="service-box-content">
                         <h3><a href="#">Visi</a></h3>
                         <p>Memberikan Stimulasi Yang Tepat Agar Anak Mampu Mengoptimalkan Semua Kecerdasannya</p>
+                        <a href="https://wa.me/6281217173406?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">
+                            <button style="background-color: #25D366; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                                Daftar Sekarang Juga, Hubungi Kami di WhatsApp
+                            </button>
+                        </a>
                     </div>
                     <div class="service-box-icon">
                         <i class="fa fa-graduation-cap" aria-hidden="true"></i>

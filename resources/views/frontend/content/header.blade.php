@@ -62,7 +62,7 @@
                                         </ul>
                                     </li> --}}
                                     <li><a href="{{url('event')}}" target="_blank">Events</a></li>
-                                    <li><a href="{{url('ppdb')}}" target="_blank">PPDB</a></li>   
+                                    <li><a href="https://wa.me/6281217173406?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">PPDB</a></li>   
                                     <li><a href="{{url('bukutamu')}}" target="_blank">Buku Tamu</a></li>
                                 </ul>
                             </li>
@@ -119,7 +119,7 @@
                                 </ul>
                             </li> --}}
                             <li class="{{ (request()->is('berita')) ? 'active' : '' }}"><a href=" {{route('berita')}} ">Berita</a></li>
-                            <li><a href="{{url('ppdb')}}" target="_blank">PPDB</a></li>
+                            <li><a href="https://wa.me/6281217173406?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">PPDB</a></li>
 
                             {{-- <li><a href="#">Lainnya</a>
                                 <ul>
