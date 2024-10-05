@@ -11,6 +11,9 @@ use App\Http\Controllers\Backend\Website\BKKonselingKelompokController;
 use App\Http\Controllers\Backend\Website\BKKelompokController;
 use App\Http\Controllers\Backend\Website\BKPribadiController;
 
+use App\Http\Controllers\Backend\Pengguna\PengajarController;
+use App\Http\Controllers\Backend\Pengguna\MuridController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -151,15 +154,24 @@ Route::prefix('/')->middleware('role:Guru')->group(function () {
 
     Route::get('bimbingan-konseling/ditanggapi', [BKTanggapanController::class, 'index'])->name('bimbingan.ditanggapi');
     Route::get('bimbingan-konseling/ditanggapi/lihat/{bk}', [BKTanggapanController::class, 'show'])->name('bimbingan.ditanggapi.show');
+
+    Route::get('backend-laporanakademik', [PengajarController::class, 'ListLaporanAkademik'])->name('backend-laporanakademik.index');
+    Route::post('backend-laporanakademik-store', [PengajarController::class, 'LaporanAkademikstore'])->name('backend-laporanakademik.store');
+    Route::get('backend-laporanakademik-edit/{id}', [PengajarController::class, 'LaporanAkademikedit'])->name('backend-laporanakademik.edit');
+    Route::post('backend-laporanakademik-update/{id}', [PengajarController::class, 'LaporanAkademikupdate'])->name('backend-laporanakademik.update');
     }
 );
 
 
 Route::prefix('/')->middleware('role:Murid')->group(function () {
     // murid
+    
     Route::get('bimbingan-konseling/pribadi', [BKPribadiController::class, 'index'])->name('bimbingan.pribadi');
     Route::get('bimbingan-konseling/pribadi/create', [BKPribadiController::class, 'create'])->name('bimbingan.pribadi.create');
     Route::post('bimbingan-konseling/pribadi', [BKPribadiController::class, 'store'])->name('bimbingan.pribadi.store');
     Route::get('bimbingan-konseling/pribadi/{data_bk}/show', [BKPribadiController::class, 'show'])->name('bimbingan.pribadi.show');
+
+    Route::get('backend-laporanakademikmurid', [MuridController::class, 'laporanakademikmurid'])->name('backend-laporanakademik.murid');
+
 }
 );

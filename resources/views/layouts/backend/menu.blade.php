@@ -199,19 +199,27 @@
 
                 {{-- MENU GURU --}}
             @elseif(Auth::user()->role == 'Guru')
-             <ul class="navigation navigation-main">
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="/bimbingan-konseling/masuk"><i data-feather="home"></i>
-                    <span class="menu-title text-truncate" data-i18n="Dashboards">Data Konseling</span>
-                </a>
-            </li>
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="/bimbingan-konseling/ditanggapi"><i data-feather="home"></i>
-                    <span class="menu-title text-truncate" data-i18n="Dashboards">Follow Up Konseling</span>
-                </a>
-            </li>
-        </ul>
-            {{-- <ul>
+                <ul class="navigation navigation-main">
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="/backend-laporanakademik"><i
+                                data-feather="home"></i>
+                            <span class="menu-title text-truncate" data-i18n="Dashboards">Laporan Akademik</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="/bimbingan-konseling/masuk"><i
+                                data-feather="home"></i>
+                            <span class="menu-title text-truncate" data-i18n="Dashboards">Data Konseling</span>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="/bimbingan-konseling/ditanggapi"><i
+                                data-feather="home"></i>
+                            <span class="menu-title text-truncate" data-i18n="Dashboards">Follow Up Konseling</span>
+                        </a>
+                    </li>
+                </ul>
+                {{-- <ul>
                 <li class=" nav-item">
                     <a class="d-flex align-items-center" href="/bimbingan-konseling/masuk"><i
                             data-feather="layanan-konseling"></i>
@@ -303,24 +311,30 @@
 
                 {{-- MENU MURID --}}
             @elseif(Auth::user()->role == 'Murid')
-            <li class="nav-item {{ request()->is('murid/konseling') ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href=" {{ route('bimbingan.pribadi') }} "><i
-                        data-feather="book"></i>
-                    <span class="menu-title text-truncate" data-i18n="Books">Layanan Konseling</span>
-                </a>
-            </li>
-                <li class="nav-item {{ request()->is('murid/perpustakaan') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('murid/konseling') ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href=" {{ route('backend-laporanakademik.murid') }} "><i
+                            data-feather="book"></i>
+                        <span class="menu-title text-truncate" data-i18n="Books">Laporan Akademik</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->is('murid/konseling') ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href=" {{ route('bimbingan.pribadi') }} "><i
+                            data-feather="book"></i>
+                        <span class="menu-title text-truncate" data-i18n="Books">Layanan Konseling</span>
+                    </a>
+                </li>
+                {{-- <li class="nav-item {{ request()->is('murid/perpustakaan') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href=" {{ route('perpustakaan.index') }} "><i
                             data-feather="book"></i>
                         <span class="menu-title text-truncate" data-i18n="Books">Perpustakaan</span>
                     </a>
-                </li>
-                <li class="nav-item {{ request()->is('murid/pembayaran') ? 'active' : '' }}">
+                </li> --}}
+                {{-- <li class="nav-item {{ request()->is('murid/pembayaran') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href=" {{ route('pembayaran.index') }} "><i
                             data-feather="dollar-sign"></i>
                         <span class="menu-title text-truncate" data-i18n="Books">Pembayaran</span>
                     </a>
-                </li>
+                </li> --}}
 
                 {{-- MENU BENDAHARA --}}
             @elseif(Auth::user()->role == 'Bendahara')

@@ -11,6 +11,8 @@
     <meta name="author" content="Andri Desmana">
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+<!-- Include Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     @include('layouts.backend.style')
 
@@ -48,6 +50,33 @@
     <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
     <!-- END: Footer-->
 
+<!-- Include Select2 JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#muridSelect').select2({
+            placeholder: 'Cari Murid',
+            allowClear: true
+        });
+
+        $('#kelompokbelajarSelect').select2({
+            placeholder: 'Cari Kelompok Belajar',
+            allowClear: true
+        });
+
+        $('#semesterSelect').select2({
+            placeholder: 'Cari Semester',
+            allowClear: true
+        });
+
+        $('#tahunajaranSelect').select2({
+            placeholder: 'Cari Tahun Ajaran',
+            allowClear: true
+        });
+    });
+</script>
 
     @include('layouts.backend.scripts')
     @yield('scripts')

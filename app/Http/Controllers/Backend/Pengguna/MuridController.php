@@ -12,6 +12,14 @@ use Session;
 use DB;
 use Validator;
 
+use App\Models\LaporanAkademik;
+use App\Models\DataKelompokBelajar;
+use App\Models\DataSemester;
+use App\Models\DataTahunAjaran;
+
+use Illuminate\Support\Facades\Auth;
+
+
 class MuridController extends Controller
 {
     /**
@@ -90,6 +98,7 @@ class MuridController extends Controller
             if ($murid) {
                 $detail = new dataMurid();
                 $detail->user_id    = $murid->id;
+                $detail->name = $murid->name;
                 $detail->save();
             }
 
@@ -193,5 +202,19 @@ class MuridController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function laporanakademikmurid()
+    {
+
+        $id = Auth::user()->id;
+
+        $id_murid = dataMurid::where('user_id', $id)->first()->id;
+
+        $file = LaporanAkademik::with(['murid', 'semester', 'tahunAjaran', 'kelompokBelajar'])
+        ->where('id_murid', $id_murid)
+        ->get();
+        return view('backend.website.content.LaporanAkademik.murid', compact('file'));
+   
     }
 }
