@@ -1,4 +1,4 @@
-<div class="faq-page-area">
+{{-- <div class="faq-page-area">
     <div class="container">
         <h1 class="about-title">Kenapa Harus SMK Yadika Natar ?</h1>
         <div class="row panel-group" id="faq-accordian">
@@ -116,4 +116,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

@@ -47,35 +47,36 @@
 
                             <li><a href="#">Layanan</a>
                                 <ul>
-                                    <li class="has-child-menu"><a href="#">Program Studi</a>
+                                    {{-- <li class="has-child-menu"><a href="#">Program Studi</a>
                                         <ul class="thired-level">
                                             @foreach ($jurusanM as $jurusans)
                                                 <li><a href=" {{ url('program', $jurusans->slug)}} "> {{$jurusans->nama}} </a></li>
                                             @endforeach
                                         </ul>
-                                    </li>
-                                    <li class="has-child-menu"><a href="#">Kegiatan</a>
+                                    </li> --}}
+                                    {{-- <li class="has-child-menu"><a href="#">Kegiatan</a>
                                         <ul class="thired-level">
                                             @foreach ($kegiatanM as $kegiatans)
                                                 <li><a href=" {{url('kegiatan', $kegiatans->slug)}} ">{{$kegiatans->nama}}</a></li>
                                             @endforeach
                                         </ul>
-                                    </li>
-                                    <li><a href="{{url('events')}}" target="_blank">Events</a></li>
+                                    </li> --}}
+                                    <li><a href="{{url('event')}}" target="_blank">Events</a></li>
                                     <li><a href="{{url('ppdb')}}" target="_blank">PPDB</a></li>   
                                     <li><a href="{{url('bukutamu')}}" target="_blank">Buku Tamu</a></li>
                                 </ul>
                             </li>
                          
                             <li class="{{ (request()->is('berita')) ? 'active' : '' }}"><a href=" {{route('berita')}} ">Berita</a></li>
+                            <li class="{{ (request()->is('gallery')) ? 'active' : '' }}"><a href=" {{route('gallery')}} ">Gallery</a></li>
                            
 
-                            <li><a href="#">Lainnya</a>
+                            {{-- <li><a href="#">Lainnya</a>
                                 <ul>
                                     <li><a href=" {{url('murid/perpustakaan')}} ">Perpustakaan</a></li>
                                     <li><a href="">Alumni</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </nav>
                 </div>
