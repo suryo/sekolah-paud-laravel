@@ -120,7 +120,7 @@
                             </li> --}}
                             <li class="{{ (request()->is('berita')) ? 'active' : '' }}"><a href=" {{route('berita')}} ">Berita</a></li>
                             <li><a href="https://wa.me/6281217173406?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">PPDB</a></li>
-
+                            <li class="{{ (request()->is('gallery')) ? 'active' : '' }}"><a href=" {{route('gallery')}} ">Gallery</a></li>
                             {{-- <li><a href="#">Lainnya</a>
                                 <ul>
                                     <li><a href="">Perpustakaan</a></li>
