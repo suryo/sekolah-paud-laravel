@@ -132,10 +132,10 @@ Route::middleware('auth')->group(function () {
         Route::get('bimbingan-konseling/ditanggapi', [BKTanggapanController::class, 'index'])->name('bimbingan.ditanggapi');
         Route::get('bimbingan-konseling/ditanggapi/lihat/{bk}', [BKTanggapanController::class, 'show'])->name('bimbingan.ditanggapi.show');
 
-        Route::get('backend-laporanakademik', [PengajarController::class, 'ListLaporanAkademik'])->name('backend-laporanakademik.index');
-        Route::post('backend-laporanakademik-store', [PengajarController::class, 'LaporanAkademikstore'])->name('backend-laporanakademik.store');
-        Route::get('backend-laporanakademik-edit/{id}', [PengajarController::class, 'LaporanAkademikedit'])->name('backend-laporanakademik.edit');
-        Route::post('backend-laporanakademik-update/{id}', [PengajarController::class, 'LaporanAkademikupdate'])->name('backend-laporanakademik.update');
+        Route::get('admin/backend-laporanakademik', [PengajarController::class, 'ListLaporanAkademik'])->name('backend-laporanakademik.index');
+        Route::post('admin/backend-laporanakademik-store', [PengajarController::class, 'LaporanAkademikstore'])->name('backend-laporanakademik.store');
+        Route::get('admin/backend-laporanakademik-edit/{id}', [PengajarController::class, 'LaporanAkademikedit'])->name('backend-laporanakademik.edit');
+        Route::post('admin/backend-laporanakademik-update/{id}', [PengajarController::class, 'LaporanAkademikupdate'])->name('backend-laporanakademik.update');
    
 
 

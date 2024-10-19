@@ -98,6 +98,12 @@
                                 <span class="menu-title text-truncate" data-i18n="Dashboards">Data Konseling</span>
                             </a>
                         </li>
+                        <li class=" nav-item">
+                            <a class="d-flex align-items-center" href="/admin/backend-laporanakademik"><i
+                                    data-feather="home"></i>
+                                <span class="menu-title text-truncate" data-i18n="Dashboards">Laporan Akademik</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class=" nav-item">
