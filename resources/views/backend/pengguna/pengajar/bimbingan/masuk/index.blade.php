@@ -59,10 +59,20 @@
                                     <td>{{$bk->nomor_bk}}</td>
                                    <td>{{$bk->dibuat_oleh->nama}}</td>
                                     <td>{{trans(ucfirst($bk->jenis))}}</td>
-                                    <td> <a href="{{route('guru.bimbingan.masuk.show',$bk->id)}}" title="Lihat" class="btn btn-sm btn-info">
+                                    <td>
+                                        @if(Auth::user()->role == 'Guru')
+                                            <a href="{{route('guru.bimbingan.masuk.show',$bk->id)}}" title="Lihat" class="btn btn-sm btn-info">
+                                        @elseif(Auth::user()->role == 'Admin')
+                                         <a href="{{route('all.bimbingan.masuk.show',$bk->id)}}" title="Lihat" class="btn btn-sm btn-info">
+                                        @endif 
+                                        
                                         <i class="fas fa-eye"></i> Lihat
                                     </a>
+                                    @if(Auth::user()->role == 'Guru')
                                     <a href="{{route('guru.bimbingan.masuk.tanggapi',$bk->id)}}" title="Edit" class="btn btn-sm btn-primary text-white">
+                                        @elseif(Auth::user()->role == 'Admin')
+                                        <a href="{{route('all.bimbingan.masuk.tanggapi',$bk->id)}}" title="Edit" class="btn btn-sm btn-primary text-white">
+                                        @endif
                                         <i class="fas fa-check-circle"></i> Tanggapi
                                     </a></td>
                                 </tr>
