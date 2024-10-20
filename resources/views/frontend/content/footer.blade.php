@@ -26,7 +26,7 @@
                     <h3>Informasi Pendaftaran</h3>
                    
                     <div class="newsletter-area">
-                        <a href="https://wa.me/6281217173406?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">
+                        <a href="https://wa.me/6281225393118?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">
                             <button style="background-color: #25D366; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
                                 Hubungi Kami di WhatsApp
                             </button>

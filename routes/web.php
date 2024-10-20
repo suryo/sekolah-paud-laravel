@@ -51,6 +51,11 @@ Route::get('berita/{slug}', [App\Http\Controllers\Frontend\IndexController::clas
 Route::get('event/{slug}', [App\Http\Controllers\Frontend\IndexController::class, 'detailEvent'])->name('detail.event');
 Route::get('event', [App\Http\Controllers\Frontend\IndexController::class, 'events'])->name('event');
 Route::get('gallery', [App\Http\Controllers\Frontend\IndexController::class, 'gallery'])->name('gallery');
+
+Route::get('bukutamu', [App\Http\Controllers\Backend\Website\BukuTamuController::class, 'create'])->name('buku_tamu');
+Route::post('bukutamu', [App\Http\Controllers\Backend\Website\BukuTamuController::class, 'store'])->name('buku_tamu.store');
+
+
 // Route::get('pendaftaran', [App\Http\Controllers\Frontend\IndexController::class, 'gallery'])->name('gallery');
 
 Auth::routes(['register' => false]);

@@ -69,6 +69,7 @@
                          
                             <li class="{{ (request()->is('berita')) ? 'active' : '' }}"><a href=" {{route('berita')}} ">Berita</a></li>
                             <li class="{{ (request()->is('gallery')) ? 'active' : '' }}"><a href=" {{route('gallery')}} ">Gallery</a></li>
+                            <li class="{{ (request()->is('buku_tamu')) ? 'active' : '' }}"><a href=" {{route('buku_tamu')}} ">Buku Tamu</a></li>
                            
 
                             {{-- <li><a href="#">Lainnya</a>
