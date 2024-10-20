@@ -104,6 +104,12 @@
                                 <span class="menu-title text-truncate" data-i18n="Dashboards">Laporan Akademik</span>
                             </a>
                         </li>
+                        <li class=" nav-item">
+                            <a class="d-flex align-items-center" href="/listbukutamu"><i
+                                    data-feather="home"></i>
+                                <span class="menu-title text-truncate" data-i18n="Dashboards">Data Buku Tamu</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class=" nav-item">

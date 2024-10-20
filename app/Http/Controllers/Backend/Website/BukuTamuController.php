@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class BukuTamuController extends Controller
 {
+
+    public function list()
+    {
+       $name = "buku Tamu";
+        //Berita
+        $bukutamu = BukuTamu::all();
+        return view('backend.website.content.bukutamu.index', compact('name','bukutamu'));
+    }
     // Display the form to create a new entry
     public function create()
     {

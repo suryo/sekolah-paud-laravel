@@ -54,6 +54,7 @@ Route::get('gallery', [App\Http\Controllers\Frontend\IndexController::class, 'ga
 
 Route::get('bukutamu', [App\Http\Controllers\Backend\Website\BukuTamuController::class, 'create'])->name('buku_tamu');
 Route::post('bukutamu', [App\Http\Controllers\Backend\Website\BukuTamuController::class, 'store'])->name('buku_tamu.store');
+Route::get('listbukutamu', [App\Http\Controllers\Backend\Website\BukuTamuController::class, 'list'])->name('buku_tamu.list');
 
 
 // Route::get('pendaftaran', [App\Http\Controllers\Frontend\IndexController::class, 'gallery'])->name('gallery');
