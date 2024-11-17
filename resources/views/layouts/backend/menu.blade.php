@@ -254,19 +254,19 @@
                     <ul class="menu-content">
                         <li>
                             <a class="d-flex align-items-center" href=""><i data-feather="circle"></i>
-                                <span class="menu-item text-truncate" data-i18n="Basic">Kelas X</span>
+                                <span class="menu-item text-truncate" data-i18n="Basic">TK A</span>
                             </a>
                         </li>
                         <li>
                             <a class="d-flex align-items-center" href=""><i data-feather="circle"></i>
-                                <span class="menu-item text-truncate" data-i18n="Basic">Kelas XI</span>
+                                <span class="menu-item text-truncate" data-i18n="Basic">TK B</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a class="d-flex align-items-center" href=""><i data-feather="circle"></i>
                                 <span class="menu-item text-truncate" data-i18n="Basic">Kelas XII</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
 
                 </li>
