@@ -37,6 +37,7 @@
                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                     <nav id="desktop-nav">
                         <ul>
+
                             <li class="{{ (request()->is('/')) ? 'active' : '' }}"><a href="/">Beranda</a></li>
                             <li><a href="#">Tentang Kami</a>
                                 <ul>
@@ -62,15 +63,15 @@
                                         </ul>
                                     </li> --}}
                                     <li><a href="{{url('event')}}" target="_blank">Events</a></li>
-                                    <li><a href="https://wa.me/6281217173406?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">PPDB</a></li>   
+                                    <li><a href="https://wa.me/6281217173406?text=Hallo,%20ingin%20bertanya%20tentang%20pendaftaran%20di%20PPT%20Dahlia%20Sememi" target="_blank">PPDB</a></li>
                                     <li><a href="{{url('bukutamu')}}" target="_blank">Buku Tamu</a></li>
                                 </ul>
                             </li>
-                         
+
                             <li class="{{ (request()->is('berita')) ? 'active' : '' }}"><a href=" {{route('berita')}} ">Berita</a></li>
                             <li class="{{ (request()->is('gallery')) ? 'active' : '' }}"><a href=" {{route('gallery')}} ">Gallery</a></li>
                             <li class="{{ (request()->is('buku_tamu')) ? 'active' : '' }}"><a href=" {{route('buku_tamu')}} ">Buku Tamu</a></li>
-                           
+
 
                             {{-- <li><a href="#">Lainnya</a>
                                 <ul>
@@ -93,6 +94,13 @@
                 <div class="mobile-menu">
                     <nav id="dropdown">
                         <ul>
+                            <li>
+                                @auth
+                                    <a href="/home" class="apply-now-btn2">Home</a>
+                                @else
+                                    <a class="apply-now-btn2" href="{{route('login')}}"> Masuk</a>
+                                @endauth
+                            </li>
                             <li class="active"><a href="#">Beranda</a></li>
                             <li><a href="#">Tentang Kami</a>
                                 <ul>
